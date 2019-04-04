@@ -1,0 +1,69 @@
+<html>
+    <head>
+         <script src="http://code.jquery.com/jquery-latest.js"></script>
+         <title>Comperio Super Simple Instant Search</title>
+    </head>
+    <body>
+        <center>
+            <article>
+                <fieldset>
+                    <legend>Digite o nome a pesquisar</legend>
+                    <div class="input-prepend">
+                        <input id="searchterm" />            
+                    </div>
+                </fieldset>
+
+                <div id="contentLoading">
+                    <div id="loading"></div>
+                </div>
+            </article>
+        </center>
+        <div id="results"></div>
+   </body>
+</html>
+   <script>
+        //aqui ativa o gif de loading
+        function loading_show(){
+            $('#loading').html("<img src='img/loading.gif'/>").fadeIn('fast');
+        }
+        
+        //Aqui desativa o gif de loading
+        function loading_hide(){
+            $('#loading').fadeOut('fast');
+        } 
+
+        // Função que realiza a pesquisa
+      $("#searchterm").keyup(function(e){
+        var q = $("#searchterm").val();
+        loading_show();
+        // se a variável não receber nada ele lista tudo
+        if(!q){
+             q = null;
+          $.getJSON("http://jonathanmedeiros.com/api-cti/cti/computadores",
+          {},
+          function(data) {
+          $("#results").empty();
+          loading_hide();
+          $("#results").append("<p>Results for <b>" + q + "</b></p>");
+          //data.nome da chave do json
+          $.each(data.computadores, function(i,item){
+            //item.nome da coluna do banco
+            $("#results").append("<div><a style='color: red;' href='http://en.wikipedia.org/wiki/" + encodeURIComponent(item.nome_computador) + "'>" + item.nome_computador + "</a><br>" + item.sistema_operacional + "<br><br></div>");
+          });
+        }); 
+          //Senão ele lista apenas o retorno da pesquisa
+        }else{
+          $.getJSON("http://jonathanmedeiros.com/api-cti/cti/buscar/"+q,
+          {},
+          function(data) {
+          $("#results").empty();
+          loading_hide();
+          $("#results").append("<p>Results for <b>" + q + "</b></p>");
+          $.each(data.departamentos, function(i,item){
+            $("#results").append("<div><a href='http://en.wikipedia.org/wiki/" + encodeURIComponent(item.nome_computador) + "'>" + item.nome_computador + "</a><br>" + item.sistema_operacional + "<br><br></div>");
+          });
+        });
+        }      
+        
+      });
+    </script>
