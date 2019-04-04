@@ -1,25 +1,27 @@
-<html>
-    <head>
-         <script src="http://code.jquery.com/jquery-latest.js"></script>
-         <title>Comperio Super Simple Instant Search</title>
-    </head>
-    <body>
-        <center>
-            <article>
-                <fieldset>
-                    <legend>Digite o nome a pesquisar</legend>
-                    <div class="input-prepend">
-                        <input id="searchterm" />            
-                    </div>
-                </fieldset>
-
-                <div id="contentLoading">
-                    <div id="loading"></div>
-                </div>
-            </article>
-        </center>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8">
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <title>Consultar CEP via AJAX com jQuery</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+  </head>
+  <body>
+    <div class="container">
+      <div class="page-header">
+        <h1 class="text-center">PESQUISA POR TERMO via Ajax com jQuery</h1>
+      </div>
+      <form class="form-horizontal">
+          <div class="form-group">
+          <label for="cep">TERMO:</label>
+          <input type="text" class="form-control" id="searchterm" placeholder="PESQUISE AQUI..." />
+          </div>
+      </form>
+        <div id="contentLoading">
+          <div id="loading"></div>
+        </div>
         <div id="results"></div>
-   </body>
+    </div>    
+  </body>
 </html>
    <script>
         //aqui ativa o gif de loading
